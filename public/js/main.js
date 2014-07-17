@@ -4,7 +4,7 @@ function mainController($scope, $http) {
 	$scope.formData = {};
 
 	$http.get('/usuarios/').success(function(data){
-		$scope.todos = data;
+		$scope.users = data;
 		console.log(data)
 		})
 		.error(function(data){
@@ -13,7 +13,7 @@ function mainController($scope, $http) {
 
 	$scope.dameUno = function(id){
 		$http.get('/usuarios/'+id).success(function(data){
-			$scope.todos = data;
+			$scope.users = data;
 			console.log(data)
 		})
 		.error(function(data) {
@@ -25,7 +25,7 @@ function mainController($scope, $http) {
 		$http.post('/usuarios/', $scope.formData)
 		.success(function(data) {
 			$scope.formData = {};
-			$scope.todos = data;
+			$scope.users = data;
 			console.log(data);
 		})
 		.error(function(data) {
@@ -36,7 +36,7 @@ function mainController($scope, $http) {
 	$scope.deleteUser = function(id) {
 		$http.delete('/usuarios/' + id)
 		.success(function(data) {
-			$scope.todos = data;
+			$scope.users = data;
 			console.log(data);
 		})
 		.error(function(data) {

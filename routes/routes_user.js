@@ -18,7 +18,7 @@ module.exports = function(app){
 	      function (err_users, results_users, fields_users) {
 	        if (err_users) {
 	            console.log("Error en la función findAllUsers: " + err_users.message);
-	            res.send("{ERROR: "+err_users.message+"}");
+	            res.json("{ERROR: "+err_users.message+", DESC_ERROR: Se ha producido un error en la BD, por favor intentalo más tarde.}");
 	        }else{
 	          console.log("Consulta de usuarios realizada con exito.");
 	          res.json(results_users);
@@ -50,7 +50,9 @@ module.exports = function(app){
 	      function (err_user, results_user, fields_user) {
 	        if (err_user) {
 	            console.log("Error en la función saveUser: " + err_user.message);
-	            res.send("{ERROR: "+err_user.message+"}");
+	            var msj_err='[{"ERROR":"'+err_user.message+'","DESC_ERROR":"Se ha producido un error al guardar el usuario."}]';
+	            res.json(config.erroresSQL._1);
+	          	findAllUsers(req,res); // Si ha ido bien devolvemos todos los usuarios.
 	        }else{
 	          console.log("Usuario guardado con éxito.");
 	          findAllUsers(req,res); // Si ha ido bien devolvemos todos los usuarios.
